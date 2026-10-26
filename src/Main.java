@@ -7,17 +7,17 @@ public class Main {
         ArrayList<String> tarefas = new ArrayList<>();
         boolean executando = true;
 
-        while (executando){
-            System.out.println("=====LISTA DE TAREFAS=====" +
-                    "[1] - Adicionar tarefa" +
-                    "[2] - Listar tarefas" +
-                    "[3] - Remover tarefas" +
-                    "[0] - Sair");
+        while (executando) {
+            System.out.printf("=====LISTA DE TAREFAS=====%n" +
+                    "[1] - Adicionar tarefa%n" +
+                    "[2] - Listar tarefas%n" +
+                    "[3] - Remover tarefas%n" +
+                    "[0] - Sair%n");
 
             System.out.print("Escolha: ");
             int opcao = scanner.nextInt();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     System.out.print("Digite a tarefa: ");
                     String tarefa = scanner.nextLine();
@@ -26,18 +26,45 @@ public class Main {
                     break;
 
                 case 2:
-                    if (tarefas.isEmpty()){
+                    if (tarefas.isEmpty()) {
                         System.out.println("Nenhuma tarefa cadastrada");
                     } else {
                         for (int i = 0; i < tarefas.size(); i++) {
                             System.out.println((i + 1) + " - " + tarefas.get(i));
                         }
                     }
+                    break;
 
+                case 3:
+                    if (tarefas.isEmpty()) {
+                        System.out.println("Não ha tarefas listadas para remover");
+                    } else {
+                        for (int i = 0; i < tarefas.size(); i++) {
+                            System.out.println((i + 1) + " - " + tarefas.get(i));
+                        }
+
+                        System.out.print("Número da tarefa para remover: ");
+                        int numero = scanner.nextInt();
+
+                        if (numero >= 1 && numero <= tarefas.size()) {
+                            String removida = tarefas.remove(numero - 1);
+                            System.out.println("Removida: " + removida);
+                        } else {
+                            System.out.println("Número inválido");
+                        }
+                    }
+                    break;
+
+                case 0:
+                    executando = false;
+                    System.out.println("Encerrando...");
+                    break;
+
+                default:
+                    System.out.println("Número inválido");
             }
 
+            scanner.close();
         }
-
-        scanner.close();
     }
 }
