@@ -16,6 +16,7 @@ public class Main {
 
             System.out.print("Escolha: ");
             int opcao = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -45,6 +46,7 @@ public class Main {
 
                         System.out.print("Número da tarefa para remover: ");
                         int numero = scanner.nextInt();
+                        scanner.nextLine();
 
                         if (numero >= 1 && numero <= tarefas.size()) {
                             String removida = tarefas.remove(numero - 1);
@@ -63,8 +65,8 @@ public class Main {
                 default:
                     System.out.println("Número inválido");
             }
-
-            scanner.close();
         }
+
+        scanner.close();
     }
 }
