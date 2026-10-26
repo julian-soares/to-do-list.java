@@ -12,6 +12,7 @@ public class Main {
                     "[1] - Adicionar tarefa%n" +
                     "[2] - Listar tarefas%n" +
                     "[3] - Remover tarefas%n" +
+                    "[4] - Limpar tarefas%n" +
                     "[0] - Sair%n");
 
             System.out.print("Escolha: ");
@@ -54,6 +55,15 @@ public class Main {
                         } else {
                             System.out.println("Número inválido");
                         }
+                    }
+                    break;
+
+                case 4:
+                    if (tarefas.isEmpty()) {
+                        System.out.println("Não há tarefas para serem limpas");
+                    } else {
+                        System.out.println("Limpando tarefas...");
+                        tarefas.clear();
                     }
                     break;
 
