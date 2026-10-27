@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> tarefas = new ArrayList<>();
+        ArrayList<Boolean> tarefasConcluidas = new ArrayList<>();
         boolean executando = true;
 
         while (executando) {
@@ -13,6 +14,7 @@ public class Main {
                     "[2] - Listar tarefas%n" +
                     "[3] - Remover tarefas%n" +
                     "[4] - Limpar tarefas%n" +
+                    "[5] - Marcar tarefa como concluída%n" +
                     "[0] - Sair%n");
 
             System.out.print("Escolha: ");
@@ -24,6 +26,7 @@ public class Main {
                     System.out.print("Digite a tarefa: ");
                     String tarefa = scanner.nextLine();
                     tarefas.add(tarefa);
+                    tarefasConcluidas.add(false);
                     System.out.println("Tarefa Adicionada");
                     break;
 
@@ -32,7 +35,11 @@ public class Main {
                         System.out.println("Nenhuma tarefa cadastrada");
                     } else {
                         for (int i = 0; i < tarefas.size(); i++) {
-                            System.out.println((i + 1) + " - " + tarefas.get(i));
+                            if (tarefasConcluidas.get(i)) {
+                                System.out.println((i + 1) + " - [x] " + tarefas.get(i));
+                            } else {
+                                System.out.println((i + 1) + " - [ ] " + tarefas.get(i));
+                            }
                         }
                     }
                     break;
@@ -42,7 +49,11 @@ public class Main {
                         System.out.println("Não ha tarefas listadas para remover");
                     } else {
                         for (int i = 0; i < tarefas.size(); i++) {
-                            System.out.println((i + 1) + " - " + tarefas.get(i));
+                            if (tarefasConcluidas.get(i)) {
+                                System.out.println((i + 1) + " - [x] " + tarefas.get(i));
+                            } else {
+                                System.out.println((i + 1) + " - [ ] " + tarefas.get(i));
+                            }
                         }
 
                         System.out.print("Número da tarefa para remover: ");
@@ -51,6 +62,7 @@ public class Main {
 
                         if (numero >= 1 && numero <= tarefas.size()) {
                             String removida = tarefas.remove(numero - 1);
+                            tarefasConcluidas.remove((numero - 1));
                             System.out.println("Removida: " + removida);
                         } else {
                             System.out.println("Número inválido");
@@ -64,6 +76,30 @@ public class Main {
                     } else {
                         System.out.println("Limpando tarefas...");
                         tarefas.clear();
+                        tarefasConcluidas.clear();
+                    }
+                    break;
+
+                case 5:
+                    if (tarefas.isEmpty()) {
+                        System.out.println("Não há tarefas para marcar");
+                    } else {
+                        for (int i = 0; i < tarefas.size(); i++) {
+                            if (tarefasConcluidas.get(i)) {
+                                System.out.println((i + 1) + " - [x] " + tarefas.get(i));
+                            } else {
+                                System.out.println((i + 1) + " - [ ] " + tarefas.get(i));
+                            }
+                        }
+
+                        System.out.print("Número da tarefa para marcar: ");
+                        int numero = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (numero >= 1 && numero <= tarefas.size()) {
+                            tarefasConcluidas.set(numero - 1, true);
+                            System.out.println("Tarefa marcada como concluída");
+                        }
                     }
                     break;
 
